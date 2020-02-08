@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Bookmark
+module BookmarkMini
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
@@ -16,6 +16,7 @@ module Bookmark
 
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid
+      g.orm :active_record, foreign_key_type: :uuid
     end
 
     config.active_job.queue_adapter = :sidekiq

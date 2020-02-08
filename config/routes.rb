@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users
+  root to: 'me#index'
+  devise_for :users, path: 'auth'
+  resources :me, only: %i(index)
   draw :development
 end

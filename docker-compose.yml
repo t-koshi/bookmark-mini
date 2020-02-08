@@ -26,12 +26,12 @@ services:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
-      - .:/bookmark:cached
+      - .:/bookmark-mini:cached
       - bundle:/bundle:cached
-      - /bookmark/log
-      - /bookmark/tmp/
-      - /bookmark/.git
-      - /bookmark/vendor
+      - /bookmark-mini/log
+      - /bookmark-mini/tmp/
+      - /bookmark-mini/.git
+      - /bookmark-mini/vendor
     ports:
       - "3000:3000"
     depends_on:
