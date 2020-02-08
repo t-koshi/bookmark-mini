@@ -7,9 +7,11 @@ gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
 
 gem 'active_interaction'
 gem 'bootsnap', '>= 1.4.2', require: false
+gem 'bootstrap'
 gem 'devise'
 gem 'hamlit-rails'
 gem 'jbuilder', '~> 2.7'
+gem 'jquery-rails'
 gem 'kaminari'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.1'
