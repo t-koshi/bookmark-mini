@@ -1,0 +1,15 @@
+.my-3.p-3.bg-white.rounded.shadow-sm
+  %h5.border-bottom.border-gray 下記のページをブックマークします
+  .card
+    .card-body
+      %h5.card-title= @web_resource.title
+      %h6.card-subtitle.mb-2.text-muted= @web_resource.url
+  = form_with(url: me_bookmarks_path, local: true) do |f|
+    .form-group
+      = f.hidden_field :url, value: @web_resource.url
+      = f.text_area :comment, rows: 2, class: 'form-control mt-2 mb-5', placeholder: "コメントを入力してください (省略可)", maxlength: "100"
+      .container
+        .border-bottom.border-gray.row
+          = f.submit 'ブックマーク', class: 'ml-auto btn btn-primary'
+
+= javascript_pack_tag 'bookmarks'

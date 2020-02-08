@@ -13,4 +13,5 @@
 #
 
 class FullyQualifiedDomainName < ApplicationRecord
+  has_many :web_resources
 end
