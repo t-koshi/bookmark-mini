@@ -16,7 +16,7 @@
         = link_to 'ブックマークミニ', root_path, class: 'navbar-brand mr-auto.mr-lg-0'
         %ul.navbar-nav.mr-auto.mt-2.mt-lg-0
           %li.nav-item.active
-            = link_to 'ブックマーク', me_bookmarks_path, class: 'nav-link'
+            = link_to 'マイブックマーク', me_bookmarks_path, class: 'nav-link'
         %form.form-inline.my-2.my-lg-0
           = link_to 'ブックマーク登録', new_me_bookmark_path, class: 'md-2 btn btn-outline-primary mr-2'
           = link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'md-2 btn btn-outline-secondary mr-2'
