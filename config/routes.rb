@@ -7,5 +7,6 @@ Rails.application.routes.draw do
       get :confirm, on: :collection
     end
   end
+  get '/web_resources/:web_resource_id/entry/:user_id', to: 'web_resources#entry', as: :bokmark_entry
   draw :development
 end

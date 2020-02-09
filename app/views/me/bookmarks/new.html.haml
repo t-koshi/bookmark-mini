@@ -1,1 +1,7 @@
-new
+.my-3.p-3.bg-white.rounded.shadow-sm
+  %h5.border-bottom.border-gray 下記のページをブックマークします
+  = form_with(url: confirm_me_bookmarks_path, local: true, method: :get) do |f|
+    .input-group.mb-3
+      = f.text_field :url, class: 'form-control', placeholder: "URLを入力してください"
+      .input-group-append
+        = f.submit '次へ', class: 'ml-auto btn btn-primary'

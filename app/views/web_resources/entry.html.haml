@@ -1,0 +1,11 @@
+- web_resource = @bookmark.web_resource
+.my-3.p-3.bg-white.rounded.shadow-sm
+  .card
+    .card-body
+      = link_to web_resource.url, target: '_blank' do
+        %h5.card-title= web_resource.title
+      %div
+        .float-left.mr-3= "#{web_resource.users_count} users"
+        .float-left
+          記事元
+          = link_to web_resource.fqdn, web_resource.fqdn_url, target: '_blank'

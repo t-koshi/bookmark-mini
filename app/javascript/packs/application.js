@@ -7,6 +7,7 @@ require("@rails/ujs").start()
 require("@rails/activestorage").start()
 require("channels")
 require('jquery')
-//= require bootstrap
-require('bootstrap-maxlength')
+import "bootstrap"
 import 'bootstrap-maxlength';
+import "@fortawesome/fontawesome-free/js/all"
+import "../stylesheets/application"

@@ -56,8 +56,9 @@ ActiveRecord::Schema.define(version: 2020_02_08_035520) do
     t.string "title", null: false
     t.text "url", default: "", null: false
     t.text "description", default: ""
+    t.text "favicon_url", default: ""
     t.text "ogp_image_url", default: ""
-    t.integer "users_count"
+    t.integer "users_count", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["fully_qualified_domain_name_id"], name: "index_web_resources_on_fully_qualified_domain_name_id"

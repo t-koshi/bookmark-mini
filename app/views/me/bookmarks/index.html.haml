@@ -1,36 +1,49 @@
 .my-3.p-3.bg-white.rounded.shadow-sm
-  %h6.border-bottom.border-gray.pb-2.mb-0
-    %span.mr-auto t_koshiのブックマーク (3)
+  %h6.border-bottom.border-gray.pb-2.mb-0.row
+    = link_to 'ブックマーク', me_bookmarks_path
+    - if @fqdn.present?
+      %span= "/ #{@fqdn} "
+    = "(#{@bookmarks.total_count})"
   .my-2
-    %form
-      .form-row
-        .form-group.col-md-11
-          %input.form-control{"aria-label" => "Search", :placeholder => "Search", :type => "text"}/
-        .form-group.col-md-1
-          %button.btn.btn-outline-success{:type => "submit"} Search
-  .media.text-muted.pt-3
-    %svg.bd-placeholder-img.mr-2.rounded{"aria-label" => "Placeholder: 32x32", :focusable => "false", :height => "32", :preserveaspectratio => "xMidYMid slice", :role => "img", :width => "32", :xmlns => "http://www.w3.org/2000/svg"}
-      %title Placeholder
-      %rect{:fill => "#007bff", :height => "100%", :width => "100%"}
-      %text{:dy => ".3em", :fill => "#007bff", :x => "50%", :y => "50%"} 32x32
-    %p.media-body.pb-3.mb-0.small.lh-125.border-bottom.border-gray
-      %strong.d-block.text-gray-dark @username
-      Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-  .media.text-muted.pt-3
-    %svg.bd-placeholder-img.mr-2.rounded{"aria-label" => "Placeholder: 32x32", :focusable => "false", :height => "32", :preserveaspectratio => "xMidYMid slice", :role => "img", :width => "32", :xmlns => "http://www.w3.org/2000/svg"}
-      %title Placeholder
-      %rect{:fill => "#e83e8c", :height => "100%", :width => "100%"}
-      %text{:dy => ".3em", :fill => "#e83e8c", :x => "50%", :y => "50%"} 32x32
-    %p.media-body.pb-3.mb-0.small.lh-125.border-bottom.border-gray
-      %strong.d-block.text-gray-dark @username
-      Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-  .media.text-muted.pt-3
-    %svg.bd-placeholder-img.mr-2.rounded{"aria-label" => "Placeholder: 32x32", :focusable => "false", :height => "32", :preserveaspectratio => "xMidYMid slice", :role => "img", :width => "32", :xmlns => "http://www.w3.org/2000/svg"}
-      %title Placeholder
-      %rect{:fill => "#6f42c1", :height => "100%", :width => "100%"}
-      %text{:dy => ".3em", :fill => "#6f42c1", :x => "50%", :y => "50%"} 32x32
-    %p.media-body.pb-3.mb-0.small.lh-125.border-bottom.border-gray
-      %strong.d-block.text-gray-dark @username
-      Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+    = form_with(url: me_bookmarks_path, local: true, method: :get) do |f|
+      .input-group.mb-3
+        = f.hidden_field :fqdn, value: @fqdn
+        = f.text_field :q, value: @q, class: 'form-control', placeholder: "自分のブックマークを検索"
+        .input-group-append
+          = f.submit '検索', class: 'ml-auto btn btn-primary'
+  - @bookmarks.each do |bookmark|
+    - web_resource = bookmark.web_resource
+    .media.text-muted.pt-3
+      - if web_resource.favicon_url.present?
+        = image_tag web_resource.favicon_url, class: "rounded mr-2", width: '32px', height: '32px'
+      - else
+        %svg.bd-placeholder-img.mr-2.rounded(height="32" width="32")
+          %rect(fill="#808080" height="100%" width="100%")
+
+      %div.media-body.pb-3.mb-0.small.lh-125.border-bottom.border-gray
+        %div
+          - if web_resource.ogp_image_url.present?
+            = image_tag web_resource.ogp_image_url, class: "rounded float-right", width: '100px'
+          %strong.d-block.text-gray-dark
+            = link_to web_resource.title, web_resource.url, target: '_blank'
+          %p.clearfix= web_resource.description
+        .p-3.mb-2.bg-white.text-dark
+          %p.float-left.mr-3= "#{web_resource.users_count} users"
+          %p.float-left= link_to web_resource.fqdn, me_bookmarks_path(fqdn: web_resource.fqdn)
+        .p-3.mb-2.bg-light.text-dark
+          %p.float-right
+            = link_to me_bookmark_path(bookmark), method: :delete do
+              %span.mr-3
+                %i.fas.fa-trash.text-dark
+          %p.float-right
+            = link_to confirm_me_bookmarks_path(url: web_resource.url) do
+              %span.mr-3
+                %i.fas.fa-edit.text-dark
+          %p
+            %span.mr-3
+              %i.fas.fa-user
+              = bookmark.user.name
+            %span= bookmark.comment
+          %p= bookmark.updated_at.strftime("%y/%m/%d")
   %small.d-block.text-right.mt-3
-    %a{:href => "#"} All updates
+    = paginate @bookmarks

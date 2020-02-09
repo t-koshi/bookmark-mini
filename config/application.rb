@@ -15,6 +15,7 @@ module BookmarkMini
     config.i18n.default_locale = :ja
 
     config.generators do |g|
+      g.assets false
       g.orm :active_record, primary_key_type: :uuid
       g.orm :active_record, foreign_key_type: :uuid
     end

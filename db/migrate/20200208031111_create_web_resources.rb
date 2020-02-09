@@ -5,8 +5,9 @@ class CreateWebResources < ActiveRecord::Migration[6.0]
       t.string :title, null: false
       t.text :url, default: '', null: false
       t.text :description, default: ''
+      t.text :favicon_url, default: ''
       t.text :ogp_image_url, default: ''
-      t.integer :users_count, defult: 0
+      t.integer :users_count, default: 0
 
       t.timestamps
     end
