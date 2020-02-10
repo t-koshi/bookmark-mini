@@ -1,15 +1,12 @@
 # frozen_string_literal: true
 
-class Bookmark::SearchService < ActiveInteraction::Base
-  object :user, class: User, default: nil
+class WebResource::SearchService < ActiveInteraction::Base
   string :q, default: nil
   string :fqdn, default: nil
   integer :page, default: 1
 
-  validates :user, presence: true
-
   def execute
-    result = user.present? ? user.bookmarks : Bookmark.all
+    result = WebResource.all
     if q.present?
       web_resource_ids = WebResource.where("title ILIKE ? OR description ILIKE ?", "%#{q}%", "%#{q}%").pluck(:id)
       result.where!(web_resource_id: web_resource_ids)
@@ -19,6 +16,6 @@ class Bookmark::SearchService < ActiveInteraction::Base
       result.where!(web_resource_id: web_resource_ids)
     end
 
-    result.order(created_at: :desc).page(page)
+    result.order(users_count: :desc).page(page)
   end
 end

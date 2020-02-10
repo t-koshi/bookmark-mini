@@ -3,7 +3,7 @@
     = link_to 'ブックマーク', root_path
     - if @fqdn.present?
       %span= "/ #{@fqdn} "
-    = "(#{@bookmarks.total_count})"
+    = "(#{@web_resources.total_count})"
   .my-2
     = form_with(url: root_path, local: true, method: :get) do |f|
       .input-group.mb-3
@@ -11,8 +11,7 @@
         = f.text_field :q, value: @q, class: 'form-control', placeholder: "ブックマークを検索"
         .input-group-append
           = f.submit '検索', class: 'ml-auto btn btn-primary'
-  - @bookmarks.each do |bookmark|
-    - web_resource = bookmark.web_resource
+  - @web_resources.each do |web_resource|
     .media.text-muted.pt-3
       - if web_resource.favicon_url.present?
         = image_tag web_resource.favicon_url, class: "rounded mr-2", width: '32px', height: '32px'
@@ -30,12 +29,5 @@
         .p-3.mb-2.bg-white.text-dark
           %p.float-left.mr-3= "#{web_resource.users_count} users"
           %p.float-left= link_to web_resource.fqdn, root_path(fqdn: web_resource.fqdn)
-        .p-3.mb-2.bg-light.text-dark
-          %p
-            %span.mr-3
-              %i.fas.fa-user
-              = bookmark.user.name
-            %span= bookmark.comment
-          %p= bookmark.updated_at.strftime("%y/%m/%d")
   %small.d-block.text-right.mt-3
-    = paginate @bookmarks
+    = paginate @web_resources
