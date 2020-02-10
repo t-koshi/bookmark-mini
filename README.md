@@ -1,24 +1,52 @@
-# README
+# 環境構築
+## 開発環境について
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+開発環境はDockerによるコンテナ環境となります。
 
-Things you may want to cover:
+### 開発環境構成
 
-* Ruby version
+コンテナ名  | ドメイン         | IP       | ポートマッピング            | 説明
+------ | ------------------ | --------- | ------------------- | ----------------
+web    | localhost   | 127.0.0.1 | HTTP(3000) | web(rails)
+mailcather    | localhost   | 127.0.0.1 | HTTP(1080) | メール受信用
 
-* System dependencies
+## Docker
+1. Dockerのインストール
 
-* Configuration
+  ```
+  Dockerのインストール(mac用)
+  https://docs.docker.com/docker-for-mac/install/#install-and-run-docker-for-mac
+  ```
 
-* Database creation
+2. docker composeのインストール
 
-* Database initialization
+  ```
+  https://docs.docker.com/compose/install/
+  ```
+## バックエンド
+### アプリ初期設定
+#### 環境変数の作成
+```
+cp .env.example .env
 
-* How to run the test suite
+```
+#### サーバ構築、 bundle install、 DB 作成、テストデータの作成
+```
+$ make init
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+### 起動コマンド
 
-* Deployment instructions
+以下のコマンドで起動します。
 
-* ...
+```
+$ make up
+```
+
+### 停止コマンド
+
+以下のコマンドで停止します。
+
+```
+$ make up
+```
