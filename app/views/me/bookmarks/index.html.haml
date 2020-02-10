@@ -36,6 +36,10 @@
               %span.mr-3
                 %i.fas.fa-trash.text-dark
           %p.float-right
+            = link_to bokmark_entry_path(web_resource_id: bookmark.web_resource_id, user_id: bookmark.user_id) do
+              %span.mr-3
+                %i.fas.fa-link.text-dark
+          %p.float-right
             = link_to confirm_me_bookmarks_path(url: web_resource.url) do
               %span.mr-3
                 %i.fas.fa-edit.text-dark

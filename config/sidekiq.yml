@@ -4,7 +4,7 @@
 production:
   :concurrency: 20
 :queues:
-- mailers
-- critical
-- default
-- low
+ - mailers
+ - critical
+ - default
+ - low

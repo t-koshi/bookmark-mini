@@ -9,3 +9,11 @@
         .float-left
           記事元
           = link_to web_resource.fqdn, web_resource.fqdn_url, target: '_blank'
+        .clearfix
+      .my-2.p-3.mb-2.bg-light.text-dark
+        %p
+          %span.mr-3
+            %i.fas.fa-user
+            = @bookmark.user.name
+          %span= @bookmark.comment
+        %p= @bookmark.updated_at.strftime("%y/%m/%d")

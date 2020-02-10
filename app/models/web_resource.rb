@@ -24,6 +24,7 @@
 
 class WebResource < ApplicationRecord
   belongs_to :fully_qualified_domain_name
+  has_many :bookmarks
 
   def fqdn
     fully_qualified_domain_name.value

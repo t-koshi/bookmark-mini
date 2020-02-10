@@ -1,0 +1,16 @@
+%nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+  %button.navbar-toggler{"aria-controls" => "navbarTogglerDemo01", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarTogglerDemo01", "data-toggle" => "collapse", :type => "button"}
+    %span.navbar-toggler-icon
+  #navbarTogglerDemo01.collapse.navbar-collapse
+    = link_to 'ブックマークミニ', root_path, class: 'navbar-brand mr-auto.mr-lg-0'
+    - if user_signed_in?
+      %ul.navbar-nav.mr-auto.mt-2.mt-lg-0
+        %li.nav-item.active
+          = link_to 'マイブックマーク', me_bookmarks_path, class: 'nav-link'
+      %form.form-inline.my-2.my-lg-0
+        = link_to 'ブックマーク登録', new_me_bookmark_path, class: 'md-2 btn btn-outline-primary mr-2'
+        = link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'md-2 btn btn-outline-secondary mr-2'
+    - else
+      %ul.navbar-nav.mr-auto.mt-2.mt-lg-0
+      %form.form-inline.my-2.my-lg-0
+        = link_to 'ログイン', new_user_session_path, class: 'md-2 btn btn-outline-primary mr-2'

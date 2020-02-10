@@ -10,4 +10,6 @@ require('jquery')
 import "bootstrap"
 import 'bootstrap-maxlength';
 import "@fortawesome/fontawesome-free/js/all"
+
 import "../stylesheets/application"
+import "../stylesheets/devise"

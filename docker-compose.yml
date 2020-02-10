@@ -39,6 +39,21 @@ services:
       - mailcatcher
     env_file:
       - ./.env
+  worker:
+    build: .
+    command: bundle exec sidekiq -C config/sidekiq.yml
+    volumes:
+      - .:/bookmark-mini:cached
+      - bundle:/bundle:cached
+      - /bookmark-mini/log
+      - /bookmark-mini/tmp/
+      - /bookmark-mini/.git
+      - /bookmark-mini/vendor
+    depends_on:
+      - redis
+      - db
+    env_file:
+      - ./.env
 
 volumes:
   db-data:

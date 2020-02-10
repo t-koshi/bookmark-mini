@@ -5,11 +5,8 @@
     %meta{charset: "utf-8"}
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_pack_tag 'application'
     = javascript_pack_tag 'application'
-    = javascript_pack_tag 'bookmarks'
-  %body
+  %body.devise
     = render 'navigation_bar'
-    %main.container{:role => "main"}
-      = render 'layouts/flash'
+    %main
       = yield

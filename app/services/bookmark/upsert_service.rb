@@ -12,9 +12,12 @@ class Bookmark::UpsertService < ActiveInteraction::Base
   def execute
     wr = compose(WebResource::FindOrCreateService, url: url)
     bookmark = compose(Bookmark::FindOrInitializeService, user: user, web_resource: wr)
+    is_new_record = bookmark.new_record?
     bookmark.comment = comment
 
-    unless bookmark.save
+    if bookmark.save
+      WebResource::UpdateUsersCountJob.perform_later(bookmark.web_resource.id) if is_new_record
+    else
       errors.merge!(bookmark.errors)
     end
 

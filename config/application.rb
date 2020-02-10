@@ -13,6 +13,7 @@ module BookmarkMini
 
     config.time_zone = 'Asia/Tokyo'
     config.i18n.default_locale = :ja
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
 
     config.generators do |g|
       g.assets false
@@ -21,5 +22,13 @@ module BookmarkMini
     end
 
     config.active_job.queue_adapter = :sidekiq
+
+    config.to_prepare do
+      Devise::SessionsController.layout "devise"
+      Devise::RegistrationsController.layout proc{ |controller| user_signed_in? ? "application" : "devise" }
+      Devise::ConfirmationsController.layout "devise"
+      Devise::UnlocksController.layout "devise"
+      Devise::PasswordsController.layout "devise"
+    end
   end
 end
