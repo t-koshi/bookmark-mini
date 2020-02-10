@@ -4,7 +4,6 @@
 #
 #  id              :uuid             not null, primary key
 #  comment         :string           default(""), not null
-#  published       :boolean          default(TRUE), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  user_id         :uuid             not null

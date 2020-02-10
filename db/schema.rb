@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 2020_02_08_035520) do
   create_table "bookmarks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.uuid "web_resource_id", null: false
-    t.boolean "published", default: true, null: false
     t.string "comment", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

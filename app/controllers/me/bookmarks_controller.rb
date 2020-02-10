@@ -39,8 +39,12 @@ class Me::BookmarksController < ApplicationController
   end
 
   def destroy
-    @friend = Bookmark.find(params[:id])
-    @friend.destroy
+    bookmark = Bookmark.find_by(id: params[:id], user: current_user)
+    if bookmark.present?
+      web_resource_id = bookmark.web_resource_id
+      bookmark.destroy
+      WebResource::UpdateUsersCountJob.perform_later(web_resource_id)
+    end
     redirect_to me_bookmarks_path
   end
 end
