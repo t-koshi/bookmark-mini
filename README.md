@@ -50,3 +50,6 @@ $ make up
 ```
 $ make up
 ```
+
+# ER図
+![ER図](https://github.com/t-koshi/bookmark-mini/blob/master/er/erdiagram.png?raw=true)
