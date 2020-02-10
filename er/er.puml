@@ -1,0 +1,47 @@
+@startuml erdiagram
+entity "User" {
+    + id [PK]
+    ==
+    email
+    encrypted_password
+    name
+    created_at
+    updated_at
+}
+
+entity "Bookmark" {
+    + id [PK]
+    ==
+    # user_id [FK(User.id)]
+    # web_resource_id [FK(RebResource.id)]
+    comment
+    created_at
+    updated_at
+}
+
+entity "WebResource" {
+    + id [PK]
+    ==
+    # fully_qualified_domain_name_id [FK(FullyQualifiedDomainName.id)]
+    title
+    description
+    favicon_url
+    ogp_image_url
+    url
+    users_count
+    created_at
+    updated_at
+}
+
+entity "FullyQualifiedDomainName" {
+    + id [PK]
+    ==
+    value
+    created_at
+    updated_at
+}
+
+WebResource }o--|| FullyQualifiedDomainName
+Bookmark }o-- WebResource
+Bookmark }o-- User
+@enduml
